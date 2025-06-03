@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gradient Border Input</title>
+  <style>
+    body {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: inline-block;
+      padding: 3px; 
+      border-radius: 10px;
+     
+    }
+    .input-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 10px;
+      background: linear-gradient(270deg, #ff00ff, #f22e2e, #00ffff);
+      background-size: 600% 600%;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      animation: gradientShift 4s ease infinite;
+      pointer-events: none;
+    }
+
+    .input-wrapper:has(input:focus)::before {
+      opacity: 1;
+    }
+    input {
+      position: relative;
+      z-index: 1;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #222;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      width: 250px;
+      
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="input-wrapper">
+    <input type="text" placeholder="Your Name" />
+  </div>
+</body>
+</html>
